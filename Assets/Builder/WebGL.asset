@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8b0be688f884f42a56f3ba3787d6d56, type: 3}
+  m_Name: WebGL
+  m_EditorClassIdentifier: 
+  buildName: ggj2025_1
+  directory: Build
+  buildGroup: 13
+  buildTarget: 20
+  scenes:
+  - {fileID: 102900000, guid: 99c9720ab356a0642a771bea13969a05, type: 3}
+  batchFile: {fileID: 102900000, guid: bd7d00df9d93494489cdef7d119ba779, type: 3}
+  batchArguments:
+  - '%zipFile'
+  - antonsem
+  - ggj2025-1
+  - webgl
+  createZipFile: 1
+  useBatchFile: 1
+  keepCurrentBuildTarget: 1
+  automaticallySaveReport: 0
+  zipFile: C:/Users/AntonSemchenko/Desktop/ggj2025_1/Build.zip
+  buildDirectory: C:/Users/AntonSemchenko/Desktop/ggj2025_1/Build
+  report: '
+
+    ----- Starting ''ggj2025_1'' build at 1/24/2025 4:29:17 PM
+
+    -
+    Directory: C:/Users/AntonSemchenko/Desktop/ggj2025_1/Build
+
+    - Build group:
+    WebGL
+
+    - Build target: WebGL
+
+    --- Build completed at 1/24/2025 4:32:12
+    PM in 174 seconds
+
+    --- Zipping C:/Users/AntonSemchenko/Desktop/ggj2025_1/Build
+    at 1/24/2025 4:32:12 PM
+
+    --- Zipped to ''C:/Users/AntonSemchenko/Desktop/ggj2025_1/Build.zip''
+    at 1/24/2025 4:32:13 PM in 0 seconds
+
+    --- Executing batch file ''Assets/Builder/PushToItch.bat''
+    at 1/24/2025 4:32:13 PM
+
+    --- Batch file was executed at 1/24/2025 4:32:16
+    PM in 3 seconds
+
+    -- ---Switching build target to WebGL
+
+    ---Build target
+    switched at 1/24/2025 4:32:16 PM in 0s
+
+    ----- Done at 1/24/2025 4:32:16 PM'
