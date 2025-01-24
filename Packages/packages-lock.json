@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.antonsem.extratools.builder": {
+      "version": "https://github.com/antonsem/ExtraBuilderPackage.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "dd62b54df0aa22533b13a6807130e09ec02c65ba"
+    },
     "com.unity.ai.navigation": {
       "version": "2.0.5",
       "depth": 0,
