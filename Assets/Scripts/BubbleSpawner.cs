@@ -7,10 +7,11 @@ namespace BubbleHell
     {
         [SerializeField] private GameObject bubble;
         [SerializeField] private Transform corner1, corner2;
+        [SerializeField] private Transform bubbleParent;
 
         void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Space))
+            if(Input.GetKeyDown(KeyCode.E))
             {
                 SpawnBubble();
             }
@@ -22,7 +23,7 @@ namespace BubbleHell
             float randZ = Random.Range(corner1.position.z, corner2.position.z);
             Vector3 randPos = new(randX, 1, randZ);
     
-            Instantiate(bubble, randPos, Quaternion.identity);
+            Instantiate(bubble, randPos,  Quaternion.identity, bubbleParent);
         }
     }
 }
