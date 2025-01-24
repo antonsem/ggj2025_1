@@ -6,6 +6,7 @@ namespace BubbleHell.Interfaces
 	{
 		void Hit(IBounceable bounceable);
 		void SetSpeed(float speed);
+		void Bounce(bool bounce);
 		void SetParent(Transform parent);
 	}
 }

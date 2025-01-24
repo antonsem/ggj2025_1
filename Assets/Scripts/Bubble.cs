@@ -6,6 +6,8 @@ namespace BubbleHell
 {
     public class Bubble : MonoBehaviour, IBounceable
     {
+        private PhysicsMaterial _physicsMaterial;
+        private SphereCollider _sphereCollider;
         private Transform _startParent;
         private Rigidbody _rb;
 
@@ -16,6 +18,9 @@ namespace BubbleHell
         {
             _startParent = transform.parent;
             _rb = GetComponent<Rigidbody>();
+            _sphereCollider = GetComponent<SphereCollider>();
+            _physicsMaterial = _sphereCollider.material;
+            _sphereCollider.material = null;
 
             // For debug purposes.
             _pickup = FindObjectOfType<Pickup>();
@@ -42,6 +47,11 @@ namespace BubbleHell
                 transform.position = parent.position;
             }
             else transform.SetParent(_startParent);
+        }
+
+        public void Bounce(bool bounce)
+        {
+            _sphereCollider.material = bounce ? _physicsMaterial : null;
         }
     }
 }
