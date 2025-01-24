@@ -37,7 +37,7 @@ namespace BubbleHell
 
         private void Update()
         {
-            if (_inPickupRange)
+            if (_inPickupRange || _isPicked)
             {
                 if(Input.GetKeyDown(KeyCode.Space) && !_isPicked)
                 {
