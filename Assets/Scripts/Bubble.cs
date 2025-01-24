@@ -9,12 +9,16 @@ namespace BubbleHell
         private Transform _startParent;
         private Rigidbody _rb;
 
+        // For debug purposes.
+        private Pickup _pickup;
 
         private void Start()
         {
             _startParent = transform.parent;
             _rb = GetComponent<Rigidbody>();
 
+            // For debug purposes.
+            _pickup = FindObjectOfType<Pickup>();
         }
 
         public void Hit(IBounceable bounceable)
@@ -27,6 +31,7 @@ namespace BubbleHell
             // For debug purposes.
             _rb.linearVelocity = Vector3.zero;
             _rb.isKinematic = speed == 0;
+            _rb.AddForce(_pickup.transform.forward * speed);
         }
 
         public void SetParent([CanBeNull] Transform parent)
