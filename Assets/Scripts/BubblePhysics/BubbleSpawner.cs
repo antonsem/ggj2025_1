@@ -6,29 +6,42 @@ namespace BubbleHell
     public class BubbleSpawner : MonoBehaviour
     {
         [SerializeField] private GameObject bubble;
-        [SerializeField] private Transform corner1, corner2;
-        [SerializeField] private Transform bubbleParent;
-        [SerializeField] private Transform pickupField;
+        [SerializeField] private Transform ground;
 
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                SpawnBubble(pickupField);
+                SpawnBubble();
             }
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKey(KeyCode.E))
             {
                 SpawnBubble();
             }
+            if (Input.GetKey(KeyCode.R))
+            {
+                PurgeBubbles();
+            }
         }
 
-        private void SpawnBubble(Transform spawnPos = null)
+        private void SpawnBubble()
         {
-            float randX = Random.Range(corner1.position.x, corner2.position.x);
-            float randZ = Random.Range(corner1.position.z, corner2.position.z);
-            Vector3 randPos = new(randX, 1, randZ);
+            Vector3 groundCenter = ground.position / 2;
+            Vector3 groundCenterScale = ground.localScale / 2;
 
-            Instantiate(bubble, spawnPos == null ? randPos : spawnPos.position, Quaternion.identity, bubbleParent);
+            float randX = Random.Range(groundCenter.x - groundCenterScale.x, groundCenter.x + groundCenterScale.x);
+            float randZ = Random.Range(groundCenter.z - groundCenterScale.z, groundCenter.z + groundCenterScale.z);
+            Vector3 randPos = new(randX, groundCenterScale.y * 2, randZ);
+
+            Instantiate(bubble, randPos, Quaternion.identity, transform);
+        }
+
+        private void PurgeBubbles()
+        {
+            foreach (Transform child in transform)
+            {
+                Destroy(child.gameObject);
+            }
         }
     }
 }
