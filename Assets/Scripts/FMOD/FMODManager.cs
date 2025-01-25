@@ -3,7 +3,12 @@ using UnityEngine;
 
 public class FMODManager : MonoBehaviour
 {
-	public void PlaySound(string eventName)
+    private void Awake()
+    {
+		PlaySound("event:/MX_MainTheme");
+    }
+
+    public void PlaySound(string eventName)
 	{
 		RuntimeManager.PlayOneShot(eventName);
 	}
