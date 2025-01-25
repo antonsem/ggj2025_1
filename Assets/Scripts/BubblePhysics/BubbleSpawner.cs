@@ -1,3 +1,7 @@
+#define NOT_GIZMO
+#if GIZMO
+using System.Collections.Generic;
+#endif
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -11,6 +15,9 @@ namespace BubbleHell
         private int _layerMask;
         private const int _maxSpawnAttempts = 100;
 
+#if GIZMO
+        private readonly List<Vector3> _allowedPositions = new();
+#endif
 
         private void Awake()
         {
@@ -45,10 +52,24 @@ namespace BubbleHell
 
             Vector3 randPos = new(randX, groundLevel, randZ);
 
+#if GIZMO
+            foreach (Vector3 position in _allowedPositions)
+            {
+                if (Vector3.Distance(position, randPos) < _sphereCastRadius * 2)
+                {
+                    return false;
+                }
+            }
+#endif
+
             Collider[] hitColliders = Physics.OverlapSphere(randPos, _sphereCastRadius, _layerMask);
             if (hitColliders.Length == 0)
             {
+#if !GIZMO
                 Instantiate(bubble, randPos, Quaternion.identity, transform);
+#else
+                _allowedPositions.Add(randPos);
+#endif
                 return true;
             }
 
@@ -76,6 +97,21 @@ namespace BubbleHell
             {
                 Destroy(child.gameObject);
             }
+
+#if GIZMO
+            _allowedPositions.Clear();
+#endif
         }
+
+#if GIZMO
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.green;
+            foreach (Vector3 position in _allowedPositions)
+            {
+                Gizmos.DrawWireSphere(position, _sphereCastRadius);
+            }
+        }
+#endif
     }
 }
