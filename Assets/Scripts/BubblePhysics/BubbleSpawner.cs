@@ -39,9 +39,11 @@ namespace BubbleHell
             Vector3 groundCenter = ground.position / 2;
             Vector3 groundCenterScale = ground.localScale / 2;
 
+            float groundLevel = ground.position.y + groundCenterScale.y + _sphereCastRadius;
             float randX = Random.Range(groundCenter.x - groundCenterScale.x, groundCenter.x + groundCenterScale.x);
             float randZ = Random.Range(groundCenter.z - groundCenterScale.z, groundCenter.z + groundCenterScale.z);
-            Vector3 randPos = new(randX, groundCenterScale.y * 2, randZ);
+
+            Vector3 randPos = new(randX, groundLevel, randZ);
 
             Collider[] hitColliders = Physics.OverlapSphere(randPos, _sphereCastRadius, _layerMask);
             if (hitColliders.Length == 0)
