@@ -1,4 +1,5 @@
-﻿using BubbleHell.Entities;
+﻿using System;
+using BubbleHell.Entities;
 using BubbleHell.Players;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,11 +15,28 @@ namespace BubbleHell.Managers
 
 	public class GameStateManager : MonoBehaviour
 	{
+		public event Action<GameState> OnGameStateChanged;
+
 		[SerializeField] private InputActionAsset _inputActionAsset;
 		[SerializeField] private PlayerInputManager _playerInputManager;
 		[SerializeField] private PlayerManager _playerManager;
 
-		public GameState CurrentGameState { get; private set; } = GameState.InLobby;
+		private GameState _currentGameState = GameState.InLobby;
+
+		public GameState CurrentGameState
+		{
+			get => _currentGameState;
+			private set
+			{
+				if(_currentGameState == value)
+				{
+					return;
+				}
+
+				_currentGameState = value;
+				OnGameStateChanged?.Invoke(value);
+			}
+		}
 
 		private InputAction _restartAction;
 		private StartButton _startButton;
