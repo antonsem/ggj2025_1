@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8a61d1ad6f21b8e429811af58c89ff4e
+guid: 4c1015e024b3b2147a97d9ecbbad07b0
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -56,11 +56,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Wiggle
+      name: Run
       takeName: Scene
       internalID: -623603649343465320
-      firstFrame: 1
-      lastFrame: 30
+      firstFrame: 76
+      lastFrame: 95
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -83,20 +83,20 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 75
     - serializedVersion: 16
-      name: Walk
+      name: Attack
       takeName: Scene
-      internalID: -8800838248204228948
-      firstFrame: 40
-      lastFrame: 70
+      internalID: -1609281748187839663
+      firstFrame: 96
+      lastFrame: 120
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -112,7 +112,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 75
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -122,10 +122,10 @@ ModelImporter:
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importPhysicalCameras: 1
-    importVisibility: 0
-    importBlendShapes: 0
-    importCameras: 0
-    importLights: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
