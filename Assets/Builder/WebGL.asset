@@ -17,49 +17,50 @@ MonoBehaviour:
   buildGroup: 13
   buildTarget: 20
   scenes:
-  - {fileID: 102900000, guid: 99c9720ab356a0642a771bea13969a05, type: 3}
+  - {fileID: 102900000, guid: 1ba612567df819243b05a97e7595be46, type: 3}
   batchFile: {fileID: 102900000, guid: bd7d00df9d93494489cdef7d119ba779, type: 3}
   batchArguments:
   - '%zipFile'
   - antonsem
-  - ggj2025-1
+  - the-bubble-hell
   - webgl
   createZipFile: 1
   useBatchFile: 1
   keepCurrentBuildTarget: 1
   automaticallySaveReport: 0
-  zipFile: C:/Users/AntonSemchenko/Desktop/ggj2025_1/Build.zip
-  buildDirectory: C:/Users/AntonSemchenko/Desktop/ggj2025_1/Build
+  zipFile: C:/Users/AntonSemchenko/Desktop/The Bubble Hell/Build.zip
+  buildDirectory: C:/Users/AntonSemchenko/Desktop/The Bubble Hell/Build
   report: '
 
-    ----- Starting ''ggj2025_1'' build at 1/24/2025 4:29:17 PM
+    ----- Starting ''ggj2025_1'' build at 1/25/2025 2:29:22 PM
 
     -
-    Directory: C:/Users/AntonSemchenko/Desktop/ggj2025_1/Build
+    Directory: C:/Users/AntonSemchenko/Desktop/The Bubble Hell/Build
 
-    - Build group:
-    WebGL
+    - Build
+    group: WebGL
 
     - Build target: WebGL
 
-    --- Build completed at 1/24/2025 4:32:12
-    PM in 174 seconds
+    --- Build completed at 1/25/2025
+    2:33:23 PM in 240 seconds
 
-    --- Zipping C:/Users/AntonSemchenko/Desktop/ggj2025_1/Build
-    at 1/24/2025 4:32:12 PM
+    --- Zipping C:/Users/AntonSemchenko/Desktop/The
+    Bubble Hell/Build at 1/25/2025 2:33:23 PM
 
-    --- Zipped to ''C:/Users/AntonSemchenko/Desktop/ggj2025_1/Build.zip''
-    at 1/24/2025 4:32:13 PM in 0 seconds
+    --- Zipped to ''C:/Users/AntonSemchenko/Desktop/The
+    Bubble Hell/Build.zip'' at 1/25/2025 2:33:23 PM in 0 seconds
 
-    --- Executing batch file ''Assets/Builder/PushToItch.bat''
-    at 1/24/2025 4:32:13 PM
+    --- Executing
+    batch file ''Assets/Builder/PushToItch.bat'' at 1/25/2025 2:33:23 PM
 
-    --- Batch file was executed at 1/24/2025 4:32:16
-    PM in 3 seconds
+    ---
+    Batch file failed execution at 1/25/2025 2:33:24 PM in 1 seconds
 
-    -- ---Switching build target to WebGL
+    -- ---Switching
+    build target to WebGL
 
-    ---Build target
-    switched at 1/24/2025 4:32:16 PM in 0s
+    ---Build target switched at 1/25/2025 2:33:24 PM in
+    0s
 
-    ----- Done at 1/24/2025 4:32:16 PM'
+    ----- Done at 1/25/2025 2:33:24 PM'
