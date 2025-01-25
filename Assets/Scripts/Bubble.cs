@@ -6,7 +6,14 @@ namespace BubbleHell
     public class Bubble : MonoBehaviour, IBounceable
     {
         private Rigidbody _rb;
-        public Vector3 Velocity => _rb.linearVelocity;
+
+        private Vector3 _lastVelocity;
+        public Vector3 Velocity => _lastVelocity;
+
+        private void Update()
+        {
+            _lastVelocity = _rb.linearVelocity;
+        }
 
         private void Awake()
         {

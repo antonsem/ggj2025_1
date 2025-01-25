@@ -17,8 +17,8 @@ namespace BubbleHell
 
         private Vector3 CalculateBounceVector(Vector3 velocity, Vector3 collisionNormal)
         {
-            var speed = velocity.magnitude;
-            var direction = Vector3.Reflect(velocity.normalized, collisionNormal);
+            float speed = velocity.magnitude;
+            Vector3 direction = Vector3.Reflect(velocity.normalized, collisionNormal);
 
             return direction * speed;
         }
