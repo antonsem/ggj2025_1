@@ -9,6 +9,7 @@ namespace BubbleHell.Players
 	public class Player : MonoBehaviour, IBounceable
 	{
 		public event Action<Player> OnDied;
+		public event Action<Player> OnEliminated;
 
 		[SerializeField] private PlayerInput _playerInput;
 		[SerializeField] private InputActionAsset _inputAsset;
@@ -18,16 +19,31 @@ namespace BubbleHell.Players
 		[SerializeField] private float _speed;
 		[SerializeField] private Hand _hand;
 
+		public int PlayerId { get; private set; }
+		public int Lives { get; private set; }
 		public Vector3 Velocity => _movable.CurrentVelocity;
 
 		private Vector3 _input;
 		private float _invincibilityTimeLeft;
 
+		#region Unity Methods
+
+		private void Awake()
+		{
+			PlayerId = _playerInput.playerIndex;
+		}
 
 		private void Update()
 		{
 			Vector3 velocity = _input.normalized * _speed;
 			_movable.Input(velocity);
+		}
+
+		#endregion
+
+		public void Heal(int lives)
+		{
+			Lives = lives;
 		}
 
 		public void OnInteract(InputAction.CallbackContext context)
@@ -76,7 +92,14 @@ namespace BubbleHell.Players
 				disableOnDeathGameObject.SetActive(false);
 			}
 
-			OnDied?.Invoke(this);
+			if(--Lives >= 0)
+			{
+				OnDied?.Invoke(this);
+			}
+			else
+			{
+				OnEliminated?.Invoke(this);
+			}
 		}
 
 		public void SetSpeed(float speed, Vector3 velocity = default)
