@@ -64,7 +64,6 @@ namespace BubbleHell.Movables
 			_rigid.linearVelocity = Vector3.zero;
 		}
 
-
 		private Vector3 GetNewVelocity(Vector3 currentVelocity)
 		{
 			if(Stats.IgnoreForce)
