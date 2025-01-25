@@ -2,6 +2,8 @@
 #if GIZMO
 using System.Collections.Generic;
 #endif
+using System;
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,13 +11,16 @@ namespace BubbleHell
 {
     public class BubbleSpawner : MonoBehaviour
     {
+        public event Action<Vector3> OnStartSpawn;
         [SerializeField] private GameObject bubble;
         [SerializeField] private Transform ground;
         private float _sphereCastRadius;
         private int _layerMask;
         private const int _maxSpawnAttempts = 100;
         public int SpawnedBubblesCount { get; private set; }
-
+        Vector3 groundCenter, groundCenterScale;
+        private float groundLevel;
+        private readonly WaitForSeconds _delay = new(3);
 #if GIZMO
         private readonly List<Vector3> _allowedPositions = new();
 #endif
@@ -24,6 +29,10 @@ namespace BubbleHell
         {
             _sphereCastRadius = bubble.GetComponent<SphereCollider>().radius;
             _layerMask = ~(1 << LayerMask.NameToLayer("Ground"));
+
+            groundCenter = ground.position / 2;
+            groundCenterScale = ground.localScale / 2;
+            groundLevel = ground.position.y + groundCenterScale.y + _sphereCastRadius;
         }
 
 #if GIZMO
@@ -45,17 +54,17 @@ namespace BubbleHell
         }
 #endif
 
+        private IEnumerator DelayedSpawn(Vector3 randPos)
+        {
+            yield return _delay;
+            Instantiate(bubble, randPos, Quaternion.identity, transform);
+        }
+
         private bool TrySpawnBubble()
         {
-            Vector3 groundCenter = ground.position / 2;
-            Vector3 groundCenterScale = ground.localScale / 2;
-
-            float groundLevel = ground.position.y + groundCenterScale.y + _sphereCastRadius;
             float randX = Random.Range(groundCenter.x - groundCenterScale.x, groundCenter.x + groundCenterScale.x);
             float randZ = Random.Range(groundCenter.z - groundCenterScale.z, groundCenter.z + groundCenterScale.z);
-
             Vector3 randPos = new(randX, groundLevel, randZ);
-
 #if GIZMO
             foreach (Vector3 position in _allowedPositions)
             {
@@ -65,12 +74,12 @@ namespace BubbleHell
                 }
             }
 #endif
-
             Collider[] hitColliders = Physics.OverlapSphere(randPos, _sphereCastRadius, _layerMask);
             if (hitColliders.Length == 0)
             {
+                OnStartSpawn?.Invoke(randPos);
 #if !GIZMO
-                Instantiate(bubble, randPos, Quaternion.identity, transform);
+                StartCoroutine(DelayedSpawn(randPos));
 #else
                 _allowedPositions.Add(randPos);
 #endif
