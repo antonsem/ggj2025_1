@@ -42,17 +42,28 @@ namespace BubbleHell
             }
             else
             {
-                ResetSpawning();
+                // Commented out because Anton's system gives (intentional?) double calls upon the startbutton press.
+                // GameOver > InGame calls.
+                //ResetSpawning();
             }
         }
 
         private void StartSpawning()
         {
-            _spawnCoroutine = StartCoroutine(nameof(SpawnLoop));
+            if (_spawnCoroutine == null)
+            {
+                _spawnCoroutine = StartCoroutine(nameof(SpawnLoop));
+            }
+            else
+            {
+                Debug.LogWarning("Tried to start spawning coroutine whilst it's already on!");
+            }
         }
 
         private IEnumerator SpawnLoop()
         {
+            yield return new WaitUntil(_bubbleSpawner.BubblesArePurged);
+
             while (true)
             {
                 _bubbleSpawner.SpawnBubble();
@@ -75,13 +86,17 @@ namespace BubbleHell
                 StopCoroutine(_spawnCoroutine);
                 _spawnCoroutine = null;
             }
+            else
+            {
+                Debug.LogWarning("Tried to stop spawning coroutine whilst it's already off!");
+            }
         }
 
         public void ResetSpawning(bool restartSpawning = false)
         {
             StopSpawning();
 
-            _bubbleSpawner.PurgeBubbles();
+            StartCoroutine(_bubbleSpawner.PurgeBubbles());
 
             if (restartSpawning)
             {

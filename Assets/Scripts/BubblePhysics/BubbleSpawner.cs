@@ -19,8 +19,10 @@ namespace BubbleHell
         private const int _maxSpawnAttempts = 100;
         public int SpawnedBubblesCount { get; private set; }
         Vector3 groundCenter, groundCenterScale;
-        private float groundLevel;
-        private readonly WaitForSeconds _delay = new(3);
+        private float _groundLevel;
+        private bool _purgedBubbles = true;
+        private readonly WaitForSeconds _spawnDelay = new(3);
+        private readonly WaitForSeconds _popDelay = new(0.15f);
 #if GIZMO
         private readonly List<Vector3> _allowedPositions = new();
 #endif
@@ -32,7 +34,7 @@ namespace BubbleHell
 
             groundCenter = ground.position / 2;
             groundCenterScale = ground.localScale / 2;
-            groundLevel = ground.position.y + groundCenterScale.y + _sphereCastRadius;
+            _groundLevel = ground.position.y + groundCenterScale.y + _sphereCastRadius;
         }
 
 #if GIZMO
@@ -55,7 +57,7 @@ namespace BubbleHell
 
         private IEnumerator DelayedSpawn(Vector3 randPos)
         {
-            yield return _delay;
+            yield return _spawnDelay;
             Instantiate(bubble, randPos, Quaternion.identity, transform);
         }
 
@@ -63,7 +65,7 @@ namespace BubbleHell
         {
             float randX = Random.Range(groundCenter.x - groundCenterScale.x, groundCenter.x + groundCenterScale.x);
             float randZ = Random.Range(groundCenter.z - groundCenterScale.z, groundCenter.z + groundCenterScale.z);
-            Vector3 randPos = new(randX, groundLevel, randZ);
+            Vector3 randPos = new(randX, _groundLevel, randZ);
 #if GIZMO
             foreach (Vector3 position in _allowedPositions)
             {
@@ -108,18 +110,22 @@ namespace BubbleHell
             }
         }
 
-        public void PurgeBubbles()
+        public IEnumerator PurgeBubbles()
         {
-            foreach (Transform child in transform)
+            _purgedBubbles = false;
+            for (int i = transform.childCount - 1; i >= 0; i--)
             {
-                Destroy(child.gameObject);
+                Destroy(transform.GetChild(i).gameObject);
+                yield return _popDelay;
             }
+            _purgedBubbles = true;
+            SpawnedBubblesCount = 0;
 #if GIZMO
             Debug.Log($"{_allowedPositions.Count} total allowed positions logged.");
             _allowedPositions.Clear();
 #endif
         }
-
+        public bool BubblesArePurged() => _purgedBubbles;
 #if GIZMO
         private void OnDrawGizmos()
         {
