@@ -38,7 +38,7 @@ namespace BubbleHell.Movables
 			}
 		}
 
-		private void Update()
+		private void FixedUpdate()
 		{
 			CurrentVelocity = GetNewVelocity(_rigid.linearVelocity);
 			_rigid.linearVelocity = CurrentVelocity;

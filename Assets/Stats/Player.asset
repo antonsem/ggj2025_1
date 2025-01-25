@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   <MaxSpeed>k__BackingField: 20
-  <MaxForce>k__BackingField: 0.1
+  <MaxForce>k__BackingField: 0.5
   <IgnoreForce>k__BackingField: 0

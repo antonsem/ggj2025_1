@@ -3,7 +3,7 @@ using BubbleHell.Movables;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace BubbleHell
+namespace BubbleHell.Player
 {
 	public class Player : MonoBehaviour, IBounceable
 	{
@@ -48,7 +48,7 @@ namespace BubbleHell
 			}
 		}
 
-		private void Update()
+		private void FixedUpdate()
 		{
 			Vector3 velocity = _input.normalized * _speed;
 			_movable.Input(velocity);
