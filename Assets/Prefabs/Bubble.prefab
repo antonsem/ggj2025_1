@@ -97,7 +97,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4091826200479211965}
-  m_Material: {fileID: 13400000, guid: bbd644d1943f40c44b2bccb6e2db1bb2, type: 2}
+  m_Material: {fileID: 13400000, guid: 431c1de22e5fad54283e17fa5079b7c3, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -162,7 +162,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a68f4117859c1146b34f108fe74423c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bias: 1
-  initialVelocity: {x: 0, y: 0, z: 0}
-  playerTransform: {fileID: 0}
-  bounceVelocity: 10
+  minVelocity: 10
