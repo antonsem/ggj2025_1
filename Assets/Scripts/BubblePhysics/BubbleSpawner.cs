@@ -35,7 +35,7 @@ namespace BubbleHell
             {
                 SpawnBubble();
             }
-            if (Input.GetKey(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.R))
             {
                 PurgeBubbles();
             }
@@ -99,6 +99,7 @@ namespace BubbleHell
             }
 
 #if GIZMO
+            Debug.Log($"{_allowedPositions.Count} total allowed positions logged.");
             _allowedPositions.Clear();
 #endif
         }
