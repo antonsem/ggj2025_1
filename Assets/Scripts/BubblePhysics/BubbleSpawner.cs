@@ -38,7 +38,6 @@ namespace BubbleHell
 #if GIZMO
         void Update()
         {
-
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 SpawnBubble();
@@ -104,7 +103,7 @@ namespace BubbleHell
                 attempts++;
                 if(attempts == _maxSpawnAttempts)
                 {
-                    Debug.LogWarning("Max bubble spawn limit hit!");
+                    Debug.LogWarning("Max spawn attempt limit hit!");
                 }
             }
         }
