@@ -195,6 +195,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputAsset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _movable: {fileID: 3485351427739325964}
+  _disableOnDeathComponents:
+  - {fileID: 3485351427739325964}
+  - {fileID: 4764683690580211887}
+  _disableOnDeathGameObjects:
+  - {fileID: 8285069318352333582}
+  - {fileID: 1665577720508742007}
+  - {fileID: 4804254943365614265}
   _speed: 25
   _hand: {fileID: 2723302067433061345}
 --- !u!114 &4259094481699803381

@@ -1,7 +1,7 @@
 ﻿using BubbleHell.Interfaces;
 using UnityEngine;
 
-namespace BubbleHell.Player
+namespace BubbleHell.Players
 {
 	public class Hand : MonoBehaviour
 	{
