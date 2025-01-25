@@ -12,7 +12,8 @@ namespace BubbleHell.Player
 		[SerializeField] private float _speed;
 		[SerializeField] private Hand _hand;
 
-		private InputAction _movementAction;
+		public Vector3 Velocity => _movable.CurrentVelocity;
+
 		private InputAction _interactionAction;
 
 		private Vector3 _input;
