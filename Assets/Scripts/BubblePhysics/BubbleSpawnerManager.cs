@@ -1,3 +1,4 @@
+using BubbleHell.Managers;
 using System.Collections;
 using UnityEngine;
 
@@ -5,16 +6,17 @@ namespace BubbleHell
 {
     public class BubbleSpawnerManager : MonoBehaviour
     {
-        [SerializeField] private int minSeconds, maxSeconds; 
+        [SerializeField] private int minSeconds, maxSeconds;
+        [SerializeField] private GameStateManager gameStateManager;
         private Coroutine _spawnCoroutine;
 
         private BubbleSpawner _bubbleSpawner;
 
-        private const int bubbleSpawnLimit = 100;
+        private const int bubbleSpawnLimit = 8;
 
         private void Awake()
         {
-            _bubbleSpawner = GetComponent<BubbleSpawner>();
+            _bubbleSpawner = transform.GetChild(0).GetComponent<BubbleSpawner>();
         }
 
         private void Start()
@@ -22,19 +24,53 @@ namespace BubbleHell
             StartSpawning();
         }
 
-        private void StartSpawning()
+        private void OnEnable()
         {
-            _spawnCoroutine = StartCoroutine(nameof(SpawnLoop));
+            gameStateManager.OnGameStateChanged += HandleGameStateChange;
         }
 
-        private IEnumerator SpawnLoop() 
-        { 
-            while(true)
+        private void OnDisable()
+        {
+            gameStateManager.OnGameStateChanged -= HandleGameStateChange;
+        }
+
+        private void HandleGameStateChange(GameState gameState)
+        {
+            if (gameState != GameState.GameOver)
+            {
+                ResetSpawning(true);
+            }
+            else
+            {
+                // Commented out because Anton's system gives (intentional?) double calls upon the startbutton press.
+                // GameOver > InGame calls.
+                //ResetSpawning();
+            }
+        }
+
+        private void StartSpawning()
+        {
+            if (_spawnCoroutine == null)
+            {
+                _spawnCoroutine = StartCoroutine(nameof(SpawnLoop));
+            }
+            else
+            {
+                Debug.LogWarning("Tried to start spawning coroutine whilst it's already on!");
+            }
+        }
+
+        private IEnumerator SpawnLoop()
+        {
+            yield return new WaitUntil(_bubbleSpawner.BubblesArePurged);
+
+            while (true)
             {
                 _bubbleSpawner.SpawnBubble();
-                if(_bubbleSpawner.SpawnedBubblesCount == bubbleSpawnLimit)
+                if (_bubbleSpawner.SpawnedBubblesCount == bubbleSpawnLimit)
                 {
-                    Debug.LogWarning("Bubble spawn limit has been reached! Exited spawning coroutine.");
+                    // Commented this out because this is intentional now.
+                    //Debug.LogWarning("Bubble spawn limit has been reached! Exited spawning coroutine.");
                     break;
                 }
 
@@ -45,17 +81,24 @@ namespace BubbleHell
 
         public void StopSpawning()
         {
-            StopCoroutine(_spawnCoroutine);
-            _spawnCoroutine = null;
+            if (_spawnCoroutine != null)
+            {
+                StopCoroutine(_spawnCoroutine);
+                _spawnCoroutine = null;
+            }
+            else
+            {
+                Debug.LogWarning("Tried to stop spawning coroutine whilst it's already off!");
+            }
         }
 
         public void ResetSpawning(bool restartSpawning = false)
         {
             StopSpawning();
 
-            _bubbleSpawner.PurgeBubbles();
+            StartCoroutine(_bubbleSpawner.PurgeBubbles());
 
-            if(restartSpawning)
+            if (restartSpawning)
             {
                 StartSpawning();
             }
