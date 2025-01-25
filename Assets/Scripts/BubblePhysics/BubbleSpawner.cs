@@ -14,6 +14,7 @@ namespace BubbleHell
         private float _sphereCastRadius;
         private int _layerMask;
         private const int _maxSpawnAttempts = 100;
+        public int SpawnedBubblesCount { get; private set; }
 
 #if GIZMO
         private readonly List<Vector3> _allowedPositions = new();
@@ -25,8 +26,10 @@ namespace BubbleHell
             _layerMask = ~(1 << LayerMask.NameToLayer("Ground"));
         }
 
+#if GIZMO
         void Update()
         {
+
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 SpawnBubble();
@@ -40,6 +43,7 @@ namespace BubbleHell
                 PurgeBubbles();
             }
         }
+#endif
 
         private bool TrySpawnBubble()
         {
@@ -76,7 +80,7 @@ namespace BubbleHell
             return false;
         }
 
-        private void SpawnBubble()
+        public void SpawnBubble()
         {
             int attempts = 0;
 
@@ -84,20 +88,24 @@ namespace BubbleHell
             {
                 if (TrySpawnBubble())
                 {
+                    SpawnedBubblesCount++;
                     return;
                 }
 
                 attempts++;
+                if(attempts == _maxSpawnAttempts)
+                {
+                    Debug.LogWarning("Max bubble spawn limit hit!");
+                }
             }
         }
 
-        private void PurgeBubbles()
+        public void PurgeBubbles()
         {
             foreach (Transform child in transform)
             {
                 Destroy(child.gameObject);
             }
-
 #if GIZMO
             Debug.Log($"{_allowedPositions.Count} total allowed positions logged.");
             _allowedPositions.Clear();

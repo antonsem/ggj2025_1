@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7459050785484303585}
+  - component: {fileID: 1475388887956666067}
   - component: {fileID: 4323214436208773712}
   m_Layer: 0
   m_Name: BubbleSpawner
@@ -32,6 +33,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1475388887956666067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3615542494895960859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 252dbf1dd236e9740b24277b09c583d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minSeconds: 2
+  maxSeconds: 6
 --- !u!114 &4323214436208773712
 MonoBehaviour:
   m_ObjectHideFlags: 0
