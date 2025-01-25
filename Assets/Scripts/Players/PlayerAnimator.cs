@@ -1,7 +1,7 @@
 ﻿using BubbleHell.Movables;
 using UnityEngine;
 
-namespace BubbleHell.Player
+namespace BubbleHell.Players
 {
 	public class PlayerAnimator : MonoBehaviour
 	{
