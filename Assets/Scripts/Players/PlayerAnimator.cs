@@ -1,15 +1,20 @@
-﻿using BubbleHell.Movables;
+﻿using BubbleHell.Misc;
+using BubbleHell.Movables;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace BubbleHell.Players
 {
 	public class PlayerAnimator : MonoBehaviour
 	{
 		[SerializeField] private Transform _visuals;
+		[SerializeField] private Player _player;
 		[SerializeField] private Movable _movable;
 		[SerializeField] private float _rotationSpeed;
 
 		[SerializeField] private Animator _animator;
+		[SerializeField] private ColorPalette _colorPalette;
+		[SerializeField] private Renderer[] _renderers;
 
 		private readonly int _speedHash = Animator.StringToHash("Speed");
 
@@ -27,6 +32,15 @@ namespace BubbleHell.Players
 			{
 				Debug.LogError($"Movable of {name} are not set! Will not animate...", this);
 				enabled = false;
+			}
+		}
+
+		private void Start()
+		{
+			foreach (Renderer rend in _renderers)
+			{
+				int index = _player.PlayerId % _colorPalette.Colors.Length;
+				rend.material.color = _colorPalette.Colors[index];
 			}
 		}
 
