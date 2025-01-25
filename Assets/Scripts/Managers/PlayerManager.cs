@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using BubbleHell.Players;
 using UnityEngine;
@@ -10,11 +12,15 @@ namespace BubbleHell.Managers
 {
 	public class PlayerManager : MonoBehaviour
 	{
+		public event Action<Player> OnLastPlayer;
+		public event Action<Player> OnPayerEliminated;
+
+		[SerializeField] private int _lifeCount = 3;
 		[SerializeField] private PlayerInputManager _playerInputManager;
 		[SerializeField] private Transform[] _spawnPositions;
 		[SerializeField] private float _respawnDelay = 1;
 
-		private readonly List<Player> _players = new();
+		private readonly Dictionary<Player, int> _players = new();
 		private CancellationTokenSource _cancellationTokenSource;
 
 		private WaitForSeconds _respawnWait;
@@ -49,15 +55,13 @@ namespace BubbleHell.Managers
 				return;
 			}
 
-			if(_players.Contains(p))
+			if(_players.TryAdd(p, _lifeCount))
 			{
-				Debug.LogError($"{p.name} is already registered to {GetType().Name} named {name}. This shouldn't happen!",
-					this);
+				p.OnDied += OnPlayerDeath;
 				return;
 			}
 
-			p.OnDied += OnPlayerDeath;
-			_players.Add(p);
+			Debug.LogError($"{p.name} is already registered to {GetType().Name} named {name}. This shouldn't happen!", this);
 		}
 
 		private void OnPlayerLeft(PlayerInput player)
@@ -68,10 +72,9 @@ namespace BubbleHell.Managers
 				return;
 			}
 
-			if(!_players.Contains(p))
+			if(!_players.ContainsKey(p))
 			{
-				Debug.LogError($"{p.name} is not registered to {GetType().Name} named {name}. This shouldn't happen!",
-					this);
+				Debug.LogError($"{p.name} is not registered to {GetType().Name} named {name}. This shouldn't happen!", this);
 				return;
 			}
 
@@ -80,7 +83,21 @@ namespace BubbleHell.Managers
 
 		private void OnPlayerDeath(Player player)
 		{
-			StartCoroutine(RespawnCoroutine(player));
+			if(--_players[player] >= 0)
+			{
+				StartCoroutine(RespawnCoroutine(player));
+			}
+			else
+			{
+				OnPayerEliminated?.Invoke(player);
+
+				int remains = _players.Values.Count(lives => lives >= 0);
+
+				if(remains == 1)
+				{
+					OnLastPlayer?.Invoke(player);
+				}
+			}
 		}
 
 		private IEnumerator RespawnCoroutine(Player player)

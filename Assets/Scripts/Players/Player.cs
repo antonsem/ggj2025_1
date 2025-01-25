@@ -18,11 +18,17 @@ namespace BubbleHell.Players
 		[SerializeField] private float _speed;
 		[SerializeField] private Hand _hand;
 
+		public int PlayerId { get; private set; }
+		public bool IsDead { get; private set; }
 		public Vector3 Velocity => _movable.CurrentVelocity;
 
 		private Vector3 _input;
 		private float _invincibilityTimeLeft;
 
+		private void Awake()
+		{
+			PlayerId = _playerInput.playerIndex;
+		}
 
 		private void Update()
 		{
@@ -56,6 +62,8 @@ namespace BubbleHell.Players
 			{
 				disableOnDeathGameObject.SetActive(true);
 			}
+
+			IsDead = false;
 		}
 
 		public void Hit(IBounceable bounceable)
@@ -76,6 +84,7 @@ namespace BubbleHell.Players
 				disableOnDeathGameObject.SetActive(false);
 			}
 
+			IsDead = true;
 			OnDied?.Invoke(this);
 		}
 
