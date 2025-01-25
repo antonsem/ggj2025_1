@@ -32,6 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7701051898154468847}
+  - {fileID: 8596002670043818409}
   m_Father: {fileID: 7193520926519461310}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8676892471590927360
@@ -176,7 +177,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8596002670043818409}
   - {fileID: 5037900540547869878}
   - {fileID: 8036695484597920701}
   m_Father: {fileID: 0}
@@ -193,6 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e45d5894d8f434cad9371ea30d7582f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerInput: {fileID: 3741336378349021210}
   _inputAsset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _movable: {fileID: 3485351427739325964}
   _disableOnDeathComponents:
@@ -288,8 +289,8 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4764683690580211887}
-        m_TargetAssemblyTypeName: BubbleHell.Player, BubbleHell
-        m_MethodName: Move
+        m_TargetAssemblyTypeName: BubbleHell.Players.Player, BubbleHell
+        m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -304,8 +305,8 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4764683690580211887}
-        m_TargetAssemblyTypeName: BubbleHell.Player, BubbleHell
-        m_MethodName: Interact
+        m_TargetAssemblyTypeName: BubbleHell.Players.Player, BubbleHell
+        m_MethodName: OnInteract
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -387,12 +388,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8285069318352333582}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7193520926519461310}
+  m_Father: {fileID: 5037900540547869878}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2723302067433061345
 MonoBehaviour:
@@ -406,12 +407,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd03c62c188b4b818bfa3c5a8cbb507c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 4764683690580211887}
   _handPosition: {fileID: 8596002670043818409}
-  _handRadius: 0.5
-  _pickupMask:
+  _handRadius: 0.45
+  _hitMask:
     serializedVersion: 2
-    m_Bits: 0
-  _throwForce: 25
+    m_Bits: 1
+  _hitForce: 25
 --- !u!1 &8918481892358382403
 GameObject:
   m_ObjectHideFlags: 0

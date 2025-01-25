@@ -10,6 +10,7 @@ namespace BubbleHell.Players
 	{
 		public event Action<Player> OnDied;
 
+		[SerializeField] private PlayerInput _playerInput;
 		[SerializeField] private InputActionAsset _inputAsset;
 		[SerializeField] private Movable _movable;
 		[SerializeField] private MonoBehaviour[] _disableOnDeathComponents;
@@ -20,27 +21,27 @@ namespace BubbleHell.Players
 		public Vector3 Velocity => _movable.CurrentVelocity;
 
 		private Vector3 _input;
-		private float _stunTimeLeft;
 		private float _invincibilityTimeLeft;
 
-		public void Move(InputAction.CallbackContext context)
-		{
-			Vector2 input = context.ReadValue<Vector2>();
-			_input = new Vector3(input.x, 0, input.y);
-		}
-
-		public void Interact(InputAction.CallbackContext context)
-		{
-			if(_stunTimeLeft <= 0 && context.started)
-			{
-				_hand.UseHand();
-			}
-		}
 
 		private void Update()
 		{
 			Vector3 velocity = _input.normalized * _speed;
 			_movable.Input(velocity);
+		}
+
+		public void OnInteract(InputAction.CallbackContext context)
+		{
+			if(enabled && context.started)
+			{
+				_hand.UseHand();
+			}
+		}
+
+		public void OnMove(InputAction.CallbackContext context)
+		{
+			Vector2 input = context.ReadValue<Vector2>();
+			_input = new Vector3(input.x, 0, input.y);
 		}
 
 		public void Spawn(Transform spawnPoint)
@@ -59,6 +60,11 @@ namespace BubbleHell.Players
 
 		public void Hit(IBounceable bounceable)
 		{
+			if(bounceable is not Player && bounceable.Velocity.sqrMagnitude < 20)
+			{
+				return;
+			}
+
 			_movable.Stop();
 			foreach (MonoBehaviour disableOnDeathComponent in _disableOnDeathComponents)
 			{

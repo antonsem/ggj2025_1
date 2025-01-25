@@ -1,9 +1,7 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
 using BubbleHell.Players;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
@@ -14,15 +12,18 @@ namespace BubbleHell.Managers
 	{
 		[SerializeField] private PlayerInputManager _playerInputManager;
 		[SerializeField] private Transform[] _spawnPositions;
-		[SerializeField] private int _respawnDelayMs;
+		[SerializeField] private float _respawnDelay = 1;
 
 		private readonly List<Player> _players = new();
 		private CancellationTokenSource _cancellationTokenSource;
+
+		private WaitForSeconds _respawnWait;
 
 		#region Unity Methods
 
 		private void Awake()
 		{
+			_respawnWait = new WaitForSeconds(_respawnDelay);
 			_cancellationTokenSource = new CancellationTokenSource();
 			_playerInputManager.onPlayerJoined += OnPlayerJoined;
 			_playerInputManager.onPlayerLeft += OnPlayerLeft;
@@ -79,24 +80,12 @@ namespace BubbleHell.Managers
 
 		private void OnPlayerDeath(Player player)
 		{
-			Respawn(player).Forget();
+			StartCoroutine(RespawnCoroutine(player));
 		}
 
-		private async UniTaskVoid Respawn(Player player)
+		private IEnumerator RespawnCoroutine(Player player)
 		{
-			if(_cancellationTokenSource == null || _cancellationTokenSource.IsCancellationRequested)
-			{
-				return;
-			}
-
-			try
-			{
-				await Task.Delay(_respawnDelayMs, _cancellationTokenSource.Token);
-			}
-			catch (Exception e) when (e is OperationCanceledException)
-			{
-				return;
-			}
+			yield return _respawnWait;
 
 			int index = Random.Range(0, _spawnPositions.Length - 1);
 			Transform spawnPos = _spawnPositions[index];
