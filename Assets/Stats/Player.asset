@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc3ac387c4548418dcd4755d4e2483a, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  <MaxSpeed>k__BackingField: 10
-  <MaxForce>k__BackingField: 1
+  <MaxSpeed>k__BackingField: 20
+  <MaxForce>k__BackingField: 0.1
   <IgnoreForce>k__BackingField: 0

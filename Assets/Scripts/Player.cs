@@ -61,7 +61,7 @@ namespace BubbleHell
 
 		public void SetSpeed(float speed, Vector3 velocity = default)
 		{
-			_movable.Input(velocity * speed, true);
+			//_movable.Input(velocity * speed, true);
 		}
 	}
 }
