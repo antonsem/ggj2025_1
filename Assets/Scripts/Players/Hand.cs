@@ -1,11 +1,14 @@
 ﻿using BubbleHell.BubblePhysics;
 using BubbleHell.Interfaces;
+using System;
 using UnityEngine;
 
 namespace BubbleHell.Players
 {
 	public class Hand : MonoBehaviour
 	{
+		public static event Action OnBubbleHit;
+
 		[SerializeField] private Player _player;
 		[SerializeField] private Transform _handPosition;
 		[SerializeField] private float _handRadius;
@@ -28,7 +31,8 @@ namespace BubbleHell.Players
 					bounceable.Hit(_player);
 					if(bounceable is Bubble)
 					{
-						bounceable.SetSpeed(_hitForce, _handPosition.forward);
+						OnBubbleHit?.Invoke();
+                        bounceable.SetSpeed(_hitForce, _handPosition.forward);
 					}
 				}
 			}
