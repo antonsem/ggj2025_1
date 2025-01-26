@@ -25348,9 +25348,9 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: OnPlayerMove
+    functionName: TriggerPlayerMoveEvent
     data: 
-    objectReferenceParameter: {fileID: 11500000, guid: 281656d73159f8f4bbc2d8e7dab23def, type: 3}
+    objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
