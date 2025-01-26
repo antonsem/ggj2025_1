@@ -1,5 +1,6 @@
 ﻿using System;
 using BubbleHell.Interfaces;
+using BubbleHell.Misc;
 using BubbleHell.Movables;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -142,6 +143,8 @@ namespace BubbleHell.Players
 				OnPlayerDeath?.Invoke();
 				OnEliminated?.Invoke(this);
 			}
+			
+			CameraShakeSignal.ShakeCamera(0.15f, 0.05f);
 		}
 
 		public void SetSpeed(float speed, Vector3 velocity = default)
