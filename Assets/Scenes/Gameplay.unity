@@ -1156,6 +1156,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 844618029}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &881590501 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4121447617450071469, guid: ab177ad43f0c5654b904e54f9e2d6244, type: 3}
+  m_PrefabInstance: {fileID: 1594226436747876623}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38d97b5a2ba5424180e285a54a25a2ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &943044163
 GameObject:
   m_ObjectHideFlags: 0
@@ -2404,6 +2415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f088844269304047b71ca36a57e28a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerManager: {fileID: 881590501}
 --- !u!1 &2125539198
 GameObject:
   m_ObjectHideFlags: 0
@@ -2520,6 +2532,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 591340648973081658, guid: cc360bdc6784c2a40af43985eaace9f0, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 1552318684869368993, guid: cc360bdc6784c2a40af43985eaace9f0, type: 3}
       propertyPath: m_Name
       value: UI
@@ -2544,6 +2560,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4850563591545917644, guid: cc360bdc6784c2a40af43985eaace9f0, type: 3}
+      propertyPath: _playerManager
+      value: 
+      objectReference: {fileID: 881590501}
     - target: {fileID: 6367187993765856341, guid: cc360bdc6784c2a40af43985eaace9f0, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2624,6 +2644,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7062167537335240997, guid: cc360bdc6784c2a40af43985eaace9f0, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7066124193088888652, guid: cc360bdc6784c2a40af43985eaace9f0, type: 3}
+      propertyPath: _playerManager
+      value: 
+      objectReference: {fileID: 881590501}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

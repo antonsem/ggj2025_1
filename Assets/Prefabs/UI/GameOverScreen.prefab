@@ -204,6 +204,9 @@ MonoBehaviour:
   _screenUI: {fileID: 7693161496154011086}
   _panels: []
   _defaultPanels: []
+  _playerImage: {fileID: 1227806403577359290}
+  _colorPalette: {fileID: 11400000, guid: 0260885d60d2a7f43be99b017b174567, type: 2}
+  _playerManager: {fileID: 0}
 --- !u!114 &7693161496154011086
 MonoBehaviour:
   m_ObjectHideFlags: 0

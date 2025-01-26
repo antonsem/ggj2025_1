@@ -1,6 +1,6 @@
 ﻿using ExtraTools.UI.Screen;
 
-namespace TheBubbleHell.UI.GameOver
+namespace BubbleHell.UI.GameOver
 {
 	public class GameOverScreenUI : ScreenUIBase
 	{

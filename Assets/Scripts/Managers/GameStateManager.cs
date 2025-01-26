@@ -1,8 +1,8 @@
 ﻿using System;
 using BubbleHell.Entities;
 using BubbleHell.Players;
+using BubbleHell.UI.GameOver;
 using TheBubbleHell.UI;
-using TheBubbleHell.UI.GameOver;
 using TheBubbleHell.UI.InGame;
 using TheBubbleHell.UI.Lobby;
 using UnityEngine;
@@ -49,6 +49,8 @@ namespace BubbleHell.Managers
 		private LobbyScreen _lobbyScreen;
 		private InGameScreen _inGameScreen;
 		private GameOverScreen _gameOverScreen;
+
+		private float _gameOverTime = 0;
 
 		#region Unity Methods
 
@@ -107,14 +109,6 @@ namespace BubbleHell.Managers
 			_playerManager.OnJoined += OnPlayerJoined;
 		}
 
-		private void OnPlayerJoined(Player _)
-		{
-			if(CurrentGameState == GameState.InLobby && _playerManager.PlayerCount == 1)
-			{
-				_lobbyScreen.ShowLobby();
-			}
-		}
-
 		private void OnDisable()
 		{
 			if(_startButton)
@@ -129,6 +123,14 @@ namespace BubbleHell.Managers
 
 		#endregion
 
+		private void OnPlayerJoined(Player _)
+		{
+			if(CurrentGameState == GameState.InLobby && _playerManager.PlayerCount == 1)
+			{
+				_lobbyScreen.ShowLobby();
+			}
+		}
+
 		private void OnRestart()
 		{
 			if(CurrentGameState == GameState.InLobby)
@@ -141,13 +143,14 @@ namespace BubbleHell.Managers
 
 		private void OnGameOver(Player _)
 		{
+			_gameOverTime = Time.time;
 			CurrentGameState = GameState.GameOver;
 			_gameOverScreen.Show();
 		}
 
 		private void OnRestartAction(InputAction.CallbackContext _)
 		{
-			if(CurrentGameState == GameState.GameOver)
+			if(CurrentGameState == GameState.GameOver && Time.time - _gameOverTime >= 1)
 			{
 				_playerManager.Restart();
 				CurrentGameState = GameState.InGame;

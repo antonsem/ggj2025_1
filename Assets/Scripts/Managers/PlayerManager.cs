@@ -92,6 +92,12 @@ namespace BubbleHell.Managers
 				p.OnEliminated += OnPlayerEliminated;
 				_players.Add(p);
 				OnJoined?.Invoke(p);
+
+				if(_gameStateManager.CurrentGameState == GameState.InGame)
+				{
+					p.Kill();
+				}
+
 				return;
 			}
 

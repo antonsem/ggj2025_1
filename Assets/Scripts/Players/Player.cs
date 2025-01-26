@@ -8,6 +8,7 @@ namespace BubbleHell.Players
 {
 	public class Player : MonoBehaviour, IBounceable
 	{
+		public event Action<int> OnLivesChanged;
 		public event Action<Player> OnDied;
 		public event Action<Player> OnEliminated;
 
@@ -20,7 +21,21 @@ namespace BubbleHell.Players
 		[SerializeField] private Hand _hand;
 
 		public int PlayerId { get; private set; }
-		public int Lives { get; private set; }
+		private int _lives;
+
+		public int Lives
+		{
+			get => _lives;
+			private set
+			{
+				if(_lives != value)
+				{
+					_lives = value;
+					OnLivesChanged?.Invoke(value);
+				}
+			}
+		}
+
 		public Vector3 Velocity => _movable.CurrentVelocity;
 
 		private Vector3 _input;
@@ -107,13 +122,10 @@ namespace BubbleHell.Players
 			_movable.Input(velocity * speed, true);
 		}
 
-#if UNITY_EDITOR
-
 		[ContextMenu("Kill")]
-		private void Kill()
+		public void Kill()
 		{
 			Hit(this);
 		}
-#endif
 	}
 }

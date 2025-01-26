@@ -1,6 +1,6 @@
 ﻿using ExtraTools.UI.Panel;
 
-namespace TheBubbleHell.UI.InGame.Stats
+namespace BubbleHell.UI.InGame.Stats
 {
 	public class StatsPanelUI : PanelUIBase
 	{
