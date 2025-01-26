@@ -5010,8 +5010,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 6
-      minScalar: 3
+      scalar: 4
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5110,8 +5110,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1.2
-      minScalar: 0.7
+      scalar: 0.5
+      minScalar: 0.4
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -7088,8 +7088,8 @@ ParticleSystem:
     x:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 10
-      minScalar: -10
+      scalar: 5
+      minScalar: -5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -7123,8 +7123,8 @@ ParticleSystem:
     y:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 10
-      minScalar: -10
+      scalar: 5
+      minScalar: -5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -7158,8 +7158,8 @@ ParticleSystem:
     z:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 10
-      minScalar: -10
+      scalar: 5
+      minScalar: -5
       maxCurve:
         serializedVersion: 2
         m_Curve:

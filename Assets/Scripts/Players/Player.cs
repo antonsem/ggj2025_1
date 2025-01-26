@@ -12,8 +12,14 @@ namespace BubbleHell.Players
 		public static event Action OnPlayerHit;
 		public static event Action OnPlayerDeath;
 		public static event Action OnPlayerMove;
-		public void InvokeOnPlayerMove() => OnPlayerMove?.Invoke();
 
+		public void InvokeOnPlayerMove()
+		{
+			OnDust?.Invoke();
+			OnPlayerMove?.Invoke();
+		}
+
+		public event Action OnDust;
 		public event Action OnAttack;
 		public event Action<int> OnLivesChanged;
 		public event Action<Player> OnDied;
@@ -143,7 +149,7 @@ namespace BubbleHell.Players
 				OnPlayerDeath?.Invoke();
 				OnEliminated?.Invoke(this);
 			}
-			
+
 			CameraShakeSignal.ShakeCamera(0.15f, 0.05f);
 		}
 

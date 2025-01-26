@@ -1,4 +1,5 @@
-﻿using BubbleHell.Misc;
+﻿using System.Collections.Generic;
+using BubbleHell.Misc;
 using BubbleHell.Movables;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -8,6 +9,7 @@ namespace BubbleHell.Players
 	public class PlayerAnimator : MonoBehaviour
 	{
 		[SerializeField] private Transform _visuals;
+		[SerializeField] private Transform _feet;
 		[SerializeField] private Player _player;
 		[SerializeField] private Movable _movable;
 		[SerializeField] private float _rotationSpeed;
@@ -17,9 +19,12 @@ namespace BubbleHell.Players
 		[SerializeField] private Renderer[] _renderers;
 		[SerializeField] private ParticleSystem[] _customColors;
 		[SerializeField] private GameObject _deathParticles;
+		[SerializeField] private GameObject _dustPrefab;
 
 		private readonly int _speedHash = Animator.StringToHash("Speed");
 		private readonly int _attackHash = Animator.StringToHash("Attack");
+
+		private readonly List<GameObject> _dustParticles = new();
 
 		#region Unity Methods
 
@@ -39,14 +44,15 @@ namespace BubbleHell.Players
 
 			_player.OnAttack += OnAttack;
 			_player.OnDied += OnDeath;
+			_player.OnDust += OnDust;
 		}
 
 		private void OnDestroy()
 		{
 			_player.OnAttack -= OnAttack;
 			_player.OnDied -= OnDeath;
+			_player.OnDust -= OnDust;
 		}
-
 
 		private void Start()
 		{
@@ -86,6 +92,27 @@ namespace BubbleHell.Players
 		}
 
 		#endregion
+
+		private void OnDust()
+		{
+			foreach (GameObject dustParticle in _dustParticles)
+			{
+				if(!dustParticle.activeSelf)
+				{
+					dustParticle.GetComponent<ParticleSystem>().Stop();
+
+					dustParticle.transform.position = _feet.position;
+					dustParticle.SetActive(true);
+
+					dustParticle.GetComponent<ParticleSystem>().Play();
+					return;
+				}
+			}
+
+			GameObject dust = Instantiate(_dustPrefab, _feet.position, _feet.rotation);
+			dust.GetComponent<ParticleSystem>().Play();
+			_dustParticles.Add(dust);
+		}
 
 		private void OnDeath(Player _)
 		{

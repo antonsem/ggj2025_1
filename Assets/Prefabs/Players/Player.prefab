@@ -126,6 +126,7 @@ Transform:
   - {fileID: 5037900540547869878}
   - {fileID: 8036695484597920701}
   - {fileID: 8224686576086727604}
+  - {fileID: 1225050581373488627}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4764683690580211887
@@ -166,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _visuals: {fileID: 5037900540547869878}
+  _feet: {fileID: 1225050581373488627}
   _player: {fileID: 4764683690580211887}
   _movable: {fileID: 3485351427739325964}
   _rotationSpeed: 1.5
@@ -184,6 +186,7 @@ MonoBehaviour:
   - {fileID: 1263902000051088183}
   - {fileID: 8447721437421332282}
   _deathParticles: {fileID: 8504279822147070617}
+  _dustPrefab: {fileID: 3320187883869085815, guid: 0fa8fc3c02b6b134da3866e956cdfc84, type: 3}
 --- !u!114 &3485351427739325964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,6 +289,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 0629ac3c-1e09-4585-a5ea-9415d6243173
     m_ActionName: 'GameStateMap/Restart[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 01efbcd8-f639-4e77-851c-65814e913c5c
+    m_ActionName: 'SystemMap/Mute[/Keyboard/m]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -485,7 +492,7 @@ Transform:
   m_GameObject: {fileID: 8285069318352333582}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.85, z: 2}
+  m_LocalPosition: {x: 0, y: 0.85, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -507,12 +514,44 @@ MonoBehaviour:
   _player: {fileID: 4764683690580211887}
   _attackTrigger: {fileID: 5345530136348861428}
   _handPosition: {fileID: 8596002670043818409}
-  _handRadius: 1
+  _handRadius: 0.75
   _hitMask:
     serializedVersion: 2
     m_Bits: 1
   _hitForce: 25
+  _hitDistance: 1
   _hitEffect: {fileID: 4273860158425958298}
+--- !u!1 &8698146041057792082
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1225050581373488627}
+  m_Layer: 0
+  m_Name: Feet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1225050581373488627
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8698146041057792082}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7193520926519461310}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1604928873497492308
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1530,7 +1569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1972487910709877232, guid: 1f58a1dea6bbd9347843e4935585e6a2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.25
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 1972487910709877232, guid: 1f58a1dea6bbd9347843e4935585e6a2, type: 3}
       propertyPath: m_LocalRotation.w
