@@ -8,7 +8,6 @@ namespace BubbleHell.BubblePhysics
 		[SerializeField] private Transform _visuals;
 		[SerializeField] private AnimationCurve _popInCurve;
 		[SerializeField] private float _speed;
-		
 
 		private void Awake()
 		{

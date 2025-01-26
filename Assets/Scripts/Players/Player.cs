@@ -10,12 +10,12 @@ namespace BubbleHell.Players
 	{
 		public static event Action OnPlayerHit;
 		public static event Action OnPlayerDeath;
-        public static event Action OnPlayerMove;
+		public static event Action OnPlayerMove;
 		public void InvokeOnPlayerMove() => OnPlayerMove?.Invoke();
 
 		public event Action OnAttack;
 		public event Action<int> OnLivesChanged;
-        public event Action<Player> OnDied;
+		public event Action<Player> OnDied;
 		public event Action<Player> OnEliminated;
 
 		[SerializeField] private PlayerInput _playerInput;
@@ -24,6 +24,8 @@ namespace BubbleHell.Players
 		[SerializeField] private MonoBehaviour[] _disableOnDeathComponents;
 		[SerializeField] private GameObject[] _disableOnDeathGameObjects;
 		[SerializeField] private float _speed;
+		[SerializeField] private float _invincibilityTime;
+		[SerializeField] private InvincibilityBubble _invincibilityBubble;
 
 		public int PlayerId { get; private set; }
 		private int _lives;
@@ -50,6 +52,7 @@ namespace BubbleHell.Players
 
 		private void Awake()
 		{
+			_invincibilityTimeLeft = _invincibilityTime;
 			PlayerId = _playerInput.playerIndex;
 		}
 
@@ -57,6 +60,16 @@ namespace BubbleHell.Players
 		{
 			Vector3 velocity = _input.normalized * _speed;
 			_movable.Input(velocity);
+
+			if(_invincibilityTimeLeft > 0)
+			{
+				_invincibilityBubble.Show();
+				_invincibilityTimeLeft -= Time.deltaTime;
+			}
+			else
+			{
+				_invincibilityBubble.Hide();
+			}
 		}
 
 		#endregion
@@ -78,7 +91,7 @@ namespace BubbleHell.Players
 		{
 			Vector2 input = context.ReadValue<Vector2>();
 			_input = new Vector3(input.x, 0, input.y);
-        }
+		}
 
 		public void Spawn(Transform spawnPoint)
 		{
@@ -92,11 +105,13 @@ namespace BubbleHell.Players
 			{
 				disableOnDeathGameObject.SetActive(true);
 			}
+
+			_invincibilityTimeLeft = _invincibilityTime;
 		}
 
 		public void Hit(IBounceable bounceable)
 		{
-			if(bounceable is Player && bounceable.Velocity.sqrMagnitude < 20)
+			if(_invincibilityTimeLeft > 0 || bounceable is Player || bounceable.Velocity.sqrMagnitude < 20)
 			{
 				return;
 			}
