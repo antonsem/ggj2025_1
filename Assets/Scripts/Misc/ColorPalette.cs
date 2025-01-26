@@ -6,5 +6,6 @@ namespace BubbleHell.Misc
 	public class ColorPalette : ScriptableObject
 	{
 		[field: SerializeField] public Color[] Colors { get; private set; }
+		[field: SerializeField] public Color DisabledImage { get; private set; }
 	}
 }

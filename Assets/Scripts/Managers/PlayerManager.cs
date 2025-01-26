@@ -13,12 +13,15 @@ namespace BubbleHell.Managers
 	public class PlayerManager : MonoBehaviour
 	{
 		public event Action<Player> OnLastPlayer;
+		public event Action<Player> OnJoined;
 
 		[SerializeField] private int _lifeCount = 2;
 		[SerializeField] private PlayerInputManager _playerInputManager;
 		[SerializeField] private GameStateManager _gameStateManager;
 		[SerializeField] private Transform[] _spawnPositions;
 		[SerializeField] private float _respawnDelay = 1;
+
+		public int PlayerCount => _players.Count;
 
 		private readonly List<Player> _players = new();
 
@@ -88,6 +91,13 @@ namespace BubbleHell.Managers
 				p.OnDied += OnPlayerDeath;
 				p.OnEliminated += OnPlayerEliminated;
 				_players.Add(p);
+				OnJoined?.Invoke(p);
+
+				if(_gameStateManager.CurrentGameState == GameState.InGame)
+				{
+					p.Kill();
+				}
+
 				return;
 			}
 
