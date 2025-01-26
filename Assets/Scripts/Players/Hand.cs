@@ -13,6 +13,7 @@ namespace BubbleHell.Players
 		[SerializeField] private float _handRadius;
 		[SerializeField] private LayerMask _hitMask;
 		[SerializeField] private float _hitForce = 25;
+		[SerializeField] private ParticleSystem _hitEffect;
 
 		private readonly RaycastHit[] _hit = new RaycastHit[1];
 		private int _workingFrames;
@@ -29,6 +30,8 @@ namespace BubbleHell.Players
 
 		private void UseHand()
 		{
+			_hitEffect.Play();
+
 			int count = Physics.SphereCastNonAlloc(_handPosition.position, _handRadius, _handPosition.forward, _hit,
 				0.1f, _hitMask);
 

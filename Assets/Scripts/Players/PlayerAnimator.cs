@@ -1,5 +1,4 @@
-﻿using System;
-using BubbleHell.Misc;
+﻿using BubbleHell.Misc;
 using BubbleHell.Movables;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -16,6 +15,7 @@ namespace BubbleHell.Players
 		[SerializeField] private Animator _animator;
 		[SerializeField] private ColorPalette _colorPalette;
 		[SerializeField] private Renderer[] _renderers;
+		[SerializeField] private ParticleSystem[] _customColors;
 
 		private readonly int _speedHash = Animator.StringToHash("Speed");
 		private readonly int _attackHash = Animator.StringToHash("Attack");
@@ -47,10 +47,17 @@ namespace BubbleHell.Players
 
 		private void Start()
 		{
+			int index = _player.PlayerId % _colorPalette.Colors.Length;
+			Color color = _colorPalette.Colors[index];
 			foreach (Renderer rend in _renderers)
 			{
-				int index = _player.PlayerId % _colorPalette.Colors.Length;
-				rend.material.color = _colorPalette.Colors[index];
+				rend.material.color = color;
+			}
+
+			foreach (ParticleSystem system in _customColors)
+			{
+				ParticleSystem.MainModule main = system.main;
+				main.startColor = color;
 			}
 		}
 
