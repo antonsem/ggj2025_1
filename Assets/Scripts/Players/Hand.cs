@@ -7,7 +7,7 @@ namespace BubbleHell.Players
 {
 	public class Hand : MonoBehaviour
 	{
-		public static event Action OnBubbleHit;
+		public static event Action OnHandUsed;
 
 		[SerializeField] private Player _player;
 		[SerializeField] private Transform _handPosition;
@@ -20,7 +20,9 @@ namespace BubbleHell.Players
 
 		public void UseHand()
 		{
-			int count = Physics.SphereCastNonAlloc(_handPosition.position, _handRadius, _handPosition.forward, _hit,
+            OnHandUsed?.Invoke();
+
+            int count = Physics.SphereCastNonAlloc(_handPosition.position, _handRadius, _handPosition.forward, _hit,
 				0.1f, _hitMask);
 
 			if(count > 0)
@@ -31,7 +33,6 @@ namespace BubbleHell.Players
 					bounceable.Hit(_player);
 					if(bounceable is Bubble)
 					{
-						OnBubbleHit?.Invoke();
                         bounceable.SetSpeed(_hitForce, _handPosition.forward);
 					}
 				}

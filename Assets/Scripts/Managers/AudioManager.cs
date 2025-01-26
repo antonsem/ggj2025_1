@@ -15,7 +15,7 @@ namespace BubbleHell
 
         private void OnEnable()
         {
-            Hand.OnBubbleHit += PlayBubbleHit;
+            Hand.OnHandUsed += PlayBirdPoke;
             BubblePhysics.Bubble.OnBounce += PlayBubbleBounce;
             Player.OnPlayerHit += PlayPlayerHit;
             Player.OnPlayerDeath += PlayPlayerDeath;
@@ -24,7 +24,7 @@ namespace BubbleHell
 
         private void OnDisable()
         {
-            Hand.OnBubbleHit -= PlayBubbleHit;
+            Hand.OnHandUsed -= PlayBirdPoke;
             BubblePhysics.Bubble.OnBounce -= PlayBubbleBounce;
             Player.OnPlayerHit -= PlayPlayerHit;
             Player.OnPlayerMove -= PlayPlayerMove;
@@ -32,7 +32,7 @@ namespace BubbleHell
         }
 
         private void PlayMainTheme() => FMOD.PlaySound(AudioPath.MX_MainTheme);
-        private void PlayBubbleHit() => FMOD.PlaySound(AudioPath.SFX_BubblePoke);
+        private void PlayBirdPoke() => FMOD.PlaySound(AudioPath.SFX_BubblePoke);
         private void PlayBubbleBounce() => FMOD.PlaySound(AudioPath.SFX_BubbleBounceWall);
         private void PlayPlayerHit() => FMOD.PlaySound(AudioPath.SFX_Damage);
         private void PlayPlayerDeath() => FMOD.PlaySound(AudioPath.SFX_Death);
