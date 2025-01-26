@@ -4,41 +4,51 @@ using UnityEngine;
 
 namespace BubbleHell.BubblePhysics
 {
-	public class Bubble : MonoBehaviour, IBounceable
-	{
-		[SerializeField] private float _maxVelocity;
+    public class Bubble : MonoBehaviour, IBounceable
+    {
+        public static event Action OnBounce;
 
-		private Rigidbody _rb;
+        [SerializeField] private float _maxVelocity;
 
-		private Vector3 _lastVelocity;
-		public Vector3 Velocity => _lastVelocity;
+        private Rigidbody _rb;
 
-		private void OnCollisionEnter(Collision other)
-		{
-			IBounceable bounceable = other.gameObject.GetComponentInParent<IBounceable>();
-			if(bounceable != null || other.transform.TryGetComponent(out bounceable))
-			{
-				bounceable.Hit(this);
-			}
-		}
+        private Vector3 _lastVelocity;
+        public Vector3 Velocity => _lastVelocity;
 
-		private void Update()
-		{
-			_lastVelocity = _rb.linearVelocity;
-		}
+        private LayerMask _layerMask;
 
-		private void Awake()
-		{
-			_rb = GetComponent<Rigidbody>();
-		}
+        private void OnCollisionEnter(Collision collision)
+        {
+            IBounceable bounceable = collision.gameObject.GetComponentInParent<IBounceable>();
+            if (bounceable != null || collision.transform.TryGetComponent(out bounceable))
+            {
+                bounceable.Hit(this);
+            }
 
-		public void Hit(IBounceable bounceable)
-		{
-		}
+            if ((_layerMask & (1 << collision.gameObject.layer)) != 0)
+            {
+                OnBounce?.Invoke();
+            }
+        }
 
-		public void SetSpeed(float speed, Vector3 dir)
-		{
-			_rb.linearVelocity = Vector3.ClampMagnitude(dir * speed, _maxVelocity);
-		}
-	}
+        private void Update()
+        {
+            _lastVelocity = _rb.linearVelocity;
+        }
+
+        private void Awake()
+        {
+            _rb = GetComponent<Rigidbody>();
+            _layerMask = ~(1 << LayerMask.NameToLayer("Ground"));
+        }
+
+        public void Hit(IBounceable bounceable)
+        {
+        }
+
+        public void SetSpeed(float speed, Vector3 dir)
+        {
+            _rb.linearVelocity = Vector3.ClampMagnitude(dir * speed, _maxVelocity);
+        }
+    }
 }

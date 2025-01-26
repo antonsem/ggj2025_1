@@ -8,9 +8,14 @@ namespace BubbleHell.Players
 {
 	public class Player : MonoBehaviour, IBounceable
 	{
+		public static event Action OnPlayerHit;
+		public static event Action OnPlayerDeath;
+        public static event Action OnPlayerMove;
+		public void InvokeOnPlayerMove() => OnPlayerMove?.Invoke();
+
 		public event Action OnAttack;
 		public event Action<int> OnLivesChanged;
-		public event Action<Player> OnDied;
+        public event Action<Player> OnDied;
 		public event Action<Player> OnEliminated;
 
 		[SerializeField] private PlayerInput _playerInput;
@@ -73,7 +78,7 @@ namespace BubbleHell.Players
 		{
 			Vector2 input = context.ReadValue<Vector2>();
 			_input = new Vector3(input.x, 0, input.y);
-		}
+        }
 
 		public void Spawn(Transform spawnPoint)
 		{
@@ -109,11 +114,13 @@ namespace BubbleHell.Players
 
 			if(--Lives >= 0)
 			{
+                OnPlayerHit?.Invoke();
 				OnDied?.Invoke(this);
-			}
+            }
 			else
 			{
-				OnEliminated?.Invoke(this);
+                OnPlayerDeath?.Invoke();
+                OnEliminated?.Invoke(this);
 			}
 		}
 
