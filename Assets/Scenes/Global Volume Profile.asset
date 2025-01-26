@@ -175,4 +175,4 @@ MonoBehaviour:
     m_Value: {r: 0.20194371, g: 0.24944444, b: 0.4264151, a: 1}
   balance:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 20
