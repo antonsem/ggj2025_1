@@ -19,7 +19,7 @@ namespace BubbleHell
             BubblePhysics.Bubble.OnBounce += PlayBubbleBounce;
             Player.OnPlayerHit += PlayPlayerHit;
             Player.OnPlayerDeath += PlayPlayerDeath;
-            //Player.OnPlayerMove += PlayPlayerMove;
+            Player.OnPlayerMove += PlayPlayerMove;
         }
 
         private void OnDisable()

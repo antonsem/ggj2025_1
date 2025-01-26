@@ -11,6 +11,7 @@ namespace BubbleHell.Players
 		public static event Action OnPlayerHit;
 		public static event Action OnPlayerDeath;
         public static event Action OnPlayerMove;
+		public void InvokeOnPlayerMove() => OnPlayerMove?.Invoke();
 
         public event Action<Player> OnDied;
 		public event Action<Player> OnEliminated;
@@ -62,8 +63,6 @@ namespace BubbleHell.Players
 		{
 			Vector2 input = context.ReadValue<Vector2>();
 			_input = new Vector3(input.x, 0, input.y);
-
-			OnPlayerMove?.Invoke();
         }
 
 		public void Spawn(Transform spawnPoint)
