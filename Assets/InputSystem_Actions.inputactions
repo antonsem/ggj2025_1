@@ -219,6 +219,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "SystemMap",
+            "id": "ecda92c4-7619-4c5c-9571-35f8c45b0e38",
+            "actions": [
+                {
+                    "name": "Mute",
+                    "type": "Button",
+                    "id": "01efbcd8-f639-4e77-851c-65814e913c5c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "db1d966c-33e3-49fe-96fe-0203942c8fc0",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mute",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
