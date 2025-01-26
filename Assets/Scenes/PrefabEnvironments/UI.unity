@@ -128,8 +128,44 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 355098788408391271, guid: cc360bdc6784c2a40af43985eaace9f0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 355098788408391271, guid: cc360bdc6784c2a40af43985eaace9f0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 355098788408391271, guid: cc360bdc6784c2a40af43985eaace9f0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 355098788408391271, guid: cc360bdc6784c2a40af43985eaace9f0, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 355098788408391271, guid: cc360bdc6784c2a40af43985eaace9f0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 71.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 462832531684279673, guid: cc360bdc6784c2a40af43985eaace9f0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 462832531684279673, guid: cc360bdc6784c2a40af43985eaace9f0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 462832531684279673, guid: cc360bdc6784c2a40af43985eaace9f0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 462832531684279673, guid: cc360bdc6784c2a40af43985eaace9f0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 114.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 462832531684279673, guid: cc360bdc6784c2a40af43985eaace9f0, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 926119081660608567, guid: cc360bdc6784c2a40af43985eaace9f0, type: 3}
       propertyPath: m_CullTransparentMesh

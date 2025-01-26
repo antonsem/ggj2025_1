@@ -9,11 +9,32 @@ namespace BubbleHell.Entities
 	public class StartButton : MonoBehaviour, IBounceable
 	{
 		[SerializeField] private PlayerManager _playerManager;
+		[SerializeField] private GameObject _pointCanvas;
 
 		public event Action OnStart;
 		public event Action OnNeedMorePlayers;
 
 		public Vector3 Velocity => Vector3.zero;
+
+		private void Awake()
+		{
+			_pointCanvas.SetActive(_playerManager.PlayerCount > 1);
+		}
+
+		private void OnEnable()
+		{
+			_playerManager.OnJoined += OnPlayerJoined;
+		}
+
+		private void OnDisable()
+		{
+			_playerManager.OnJoined += OnPlayerJoined;
+		}
+
+		private void OnPlayerJoined(Player _)
+		{
+			_pointCanvas.SetActive(_playerManager.PlayerCount > 1);
+		}
 
 		public void Hit(IBounceable bounceable)
 		{

@@ -47,6 +47,6 @@ namespace BubbleHell.Managers
         private void PlayPlayerDeath() => FMOD.PlaySound(AudioPath.SFX_Death);
         private void PlayPlayerMove() => FMOD.PlaySound(AudioPath.SFX_Footstep);
         private void PlayBubblePop() => FMOD.PlaySound(AudioPath.SFX_Pop);
-        private void PlayBumperHit() => FMOD.PlaySound(AudioPath.SFX_Bumper);
+        private void PlayBumperHit() => FMOD.PlaySound(AudioPath.SFX_Boing);
     }
 }
