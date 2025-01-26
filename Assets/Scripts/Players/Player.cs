@@ -96,11 +96,16 @@ namespace BubbleHell.Players
 
 		public void Hit(IBounceable bounceable)
 		{
-			if(bounceable is not Player && bounceable.Velocity.sqrMagnitude < 20)
+			if(bounceable is Player && bounceable.Velocity.sqrMagnitude < 20)
 			{
 				return;
 			}
 
+			Die();
+		}
+
+		private void Die()
+		{
 			_movable.Stop();
 			foreach (MonoBehaviour disableOnDeathComponent in _disableOnDeathComponents)
 			{
@@ -114,13 +119,13 @@ namespace BubbleHell.Players
 
 			if(--Lives >= 0)
 			{
-                OnPlayerHit?.Invoke();
+				OnPlayerHit?.Invoke();
 				OnDied?.Invoke(this);
-            }
+			}
 			else
 			{
-                OnPlayerDeath?.Invoke();
-                OnEliminated?.Invoke(this);
+				OnPlayerDeath?.Invoke();
+				OnEliminated?.Invoke(this);
 			}
 		}
 
@@ -132,7 +137,7 @@ namespace BubbleHell.Players
 		[ContextMenu("Kill")]
 		public void Kill()
 		{
-			Hit(this);
+			Die();
 		}
 	}
 }
