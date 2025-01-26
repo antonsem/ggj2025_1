@@ -1,4 +1,5 @@
-﻿using BubbleHell.BubblePhysics;
+﻿using System;
+using BubbleHell.BubblePhysics;
 using BubbleHell.Interfaces;
 using System;
 using UnityEngine;
@@ -10,19 +11,32 @@ namespace BubbleHell.Players
 		public static event Action OnHandUsed;
 
 		[SerializeField] private Player _player;
+		[SerializeField] private AttackTrigger _attackTrigger;
 		[SerializeField] private Transform _handPosition;
 		[SerializeField] private float _handRadius;
 		[SerializeField] private LayerMask _hitMask;
 		[SerializeField] private float _hitForce = 25;
+		[SerializeField] private ParticleSystem _hitEffect;
 
 		private readonly RaycastHit[] _hit = new RaycastHit[1];
 		private int _workingFrames;
 
-		public void UseHand()
+		private void Awake()
 		{
-            OnHandUsed?.Invoke();
+			_attackTrigger.OnAttacked += UseHand;
+		}
 
-            int count = Physics.SphereCastNonAlloc(_handPosition.position, _handRadius, _handPosition.forward, _hit,
+		private void OnDestroy()
+		{
+			_attackTrigger.OnAttacked -= UseHand;
+		}
+
+		private void UseHand()
+		{
+			OnHandUsed?.Invoke();
+			_hitEffect.Play();
+
+			int count = Physics.SphereCastNonAlloc(_handPosition.position, _handRadius, _handPosition.forward, _hit,
 				0.1f, _hitMask);
 
 			if(count > 0)
