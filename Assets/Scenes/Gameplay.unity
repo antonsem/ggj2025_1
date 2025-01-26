@@ -1201,7 +1201,7 @@ Camera:
   m_GameObject: {fileID: 943044163}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.0035599852, g: 0.06087575, b: 0.1509434, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -1410,7 +1410,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1058881926
 Transform:
   m_ObjectHideFlags: 0
@@ -2491,6 +2491,22 @@ PrefabInstance:
     - target: {fileID: 6367187993765856341, guid: cc360bdc6784c2a40af43985eaace9f0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7005680152595202500, guid: cc360bdc6784c2a40af43985eaace9f0, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 7005680152595202500, guid: cc360bdc6784c2a40af43985eaace9f0, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 59.99996
+      objectReference: {fileID: 0}
+    - target: {fileID: 7005680152595202500, guid: cc360bdc6784c2a40af43985eaace9f0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7005680152595202500, guid: cc360bdc6784c2a40af43985eaace9f0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 7062167537335240997, guid: cc360bdc6784c2a40af43985eaace9f0, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag

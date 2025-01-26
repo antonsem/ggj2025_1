@@ -25,7 +25,7 @@ namespace BubbleHell.Misc
 
 		private void Update()
 		{
-			transform.LookAt(Camera.main.transform.position);
+			transform.LookAt(-Camera.main.transform.position);
 
 			transform.position = Vector3.Lerp(_prevPos, _nextPos, _progress);
 			_progress += Time.deltaTime * _speed;

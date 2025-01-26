@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: ExtraBuilder
   m_EditorClassIdentifier: 
   buildSettings:
-  - {fileID: 11400000, guid: ca33a69b97dcd1340a784a361d321d95, type: 2}
+  - {fileID: 11400000, guid: 0296c9e01fc91fd4c81db3e815c06161, type: 2}
+  - {fileID: 11400000, guid: b89610c2c6db60849a232a26f5b9ce17, type: 2}
+  - {fileID: 11400000, guid: 0dea0bd09ffb5f24f9674f44b4e99a64, type: 2}
   keepCurrentBuildTarget: 0
   automaticallySaveReport: 1
-  deployPath: 
+  deployPath: C:/Users/AntonSemchenko/Desktop/ggj2025_1
   report: 
