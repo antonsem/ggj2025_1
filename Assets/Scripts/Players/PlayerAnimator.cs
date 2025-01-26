@@ -16,6 +16,7 @@ namespace BubbleHell.Players
 		[SerializeField] private ColorPalette _colorPalette;
 		[SerializeField] private Renderer[] _renderers;
 		[SerializeField] private ParticleSystem[] _customColors;
+		[SerializeField] private GameObject _deathParticles;
 
 		private readonly int _speedHash = Animator.StringToHash("Speed");
 		private readonly int _attackHash = Animator.StringToHash("Attack");
@@ -37,11 +38,13 @@ namespace BubbleHell.Players
 			}
 
 			_player.OnAttack += OnAttack;
+			_player.OnDied += OnDeath;
 		}
 
 		private void OnDestroy()
 		{
 			_player.OnAttack -= OnAttack;
+			_player.OnDied -= OnDeath;
 		}
 
 
@@ -83,6 +86,12 @@ namespace BubbleHell.Players
 		}
 
 		#endregion
+
+		private void OnDeath(Player _)
+		{
+			GameObject particles = Instantiate(_deathParticles, _visuals.position + Vector3.up, Quaternion.identity);
+			particles.SetActive(true);
+		}
 
 		private void OnAttack()
 		{
