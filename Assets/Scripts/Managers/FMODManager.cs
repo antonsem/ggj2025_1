@@ -21,4 +21,5 @@ public static class AudioPath
     public const string SFX_BubblePoke = "event:/SFX_BubblePoke";
     public const string SFX_Damage = "event:/SFX_Damage";
     public const string SFX_Footstep = "event:/SFX_Footstep";
+    public const string SFX_Death = "event:/SFX_Death";
 }

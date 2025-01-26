@@ -33,6 +33,7 @@ namespace BubbleHell
         private void PlayBubbleHit() => FMOD.PlaySound(AudioPath.SFX_BubblePoke);
         private void PlayBubbleBounce() => FMOD.PlaySound(AudioPath.SFX_BubbleBounceWall);
         private void PlayPlayerHit() => FMOD.PlaySound(AudioPath.SFX_Damage);
+        private void PlayPlayerDeath() => FMOD.PlaySound(AudioPath.SFX_Death);
         private void PlayPlayerMove() => FMOD.PlaySound(AudioPath.SFX_Footstep);
     }
 }
