@@ -1,29 +1,35 @@
 using BubbleHell.Interfaces;
 using System;
+using BubbleHell.Misc;
 using UnityEngine;
 
 namespace BubbleHell.BubblePhysics
 {
-    public class Bouncer : MonoBehaviour
-    {
-        public static Action OnBounce;
-        [SerializeField] private float bounceForce = 10f;
+	public class Bouncer : MonoBehaviour
+	{
+		public static Action OnBounce;
+		[SerializeField] private Animator _animator;
+		[SerializeField] private float bounceForce = 10f;
 
-        private void OnCollisionEnter(Collision collision)
-        {
-            if (collision.transform.TryGetComponent(out IBounceable bounceable))
-            {
-                bounceable.SetSpeed(bounceForce, CalculateBounceVector(bounceable.Velocity, collision.contacts[0].normal));
-                OnBounce?.Invoke();
-            }
-        }
+		private readonly int _bounceHash = Animator.StringToHash("Bounce");
 
-        private Vector3 CalculateBounceVector(Vector3 velocity, Vector3 collisionNormal)
-        {
-            float speed = velocity.magnitude;
-            Vector3 direction = Vector3.Reflect(velocity.normalized, collisionNormal);
+		private void OnCollisionEnter(Collision collision)
+		{
+			if(collision.transform.TryGetComponent(out IBounceable bounceable))
+			{
+				CameraShakeSignal.ShakeCamera(0.1f, 0.025f);
+				_animator.SetTrigger(_bounceHash);
+				bounceable.SetSpeed(bounceForce, CalculateBounceVector(bounceable.Velocity, collision.contacts[0].normal));
+				OnBounce?.Invoke();
+			}
+		}
 
-            return direction * speed;
-        }
-    }
+		private Vector3 CalculateBounceVector(Vector3 velocity, Vector3 collisionNormal)
+		{
+			float speed = velocity.magnitude;
+			Vector3 direction = Vector3.Reflect(velocity.normalized, collisionNormal);
+
+			return direction * speed;
+		}
+	}
 }
