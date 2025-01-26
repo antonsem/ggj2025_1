@@ -1,3 +1,4 @@
+using BubbleHell.BubblePhysics;
 using BubbleHell.Players;
 using FMOD.Studio;
 using UnityEngine;
@@ -18,19 +19,23 @@ namespace BubbleHell.Managers
         private void OnEnable()
         {
             Hand.OnHandUsed += PlayBirdPoke;
-            BubblePhysics.Bubble.OnBounce += PlayBubbleBounce;
+            Bubble.OnBounce += PlayBubbleBounce;
             Player.OnPlayerHit += PlayPlayerHit;
             Player.OnPlayerDeath += PlayPlayerDeath;
             Player.OnPlayerMove += PlayPlayerMove;
+            BubbleSpawner.OnPopBubble += PlayBubblePop;
+            Bouncer.OnBounce += PlayBumperHit;
         }
 
         private void OnDisable()
         {
             Hand.OnHandUsed -= PlayBirdPoke;
-            BubblePhysics.Bubble.OnBounce -= PlayBubbleBounce;
+            Bubble.OnBounce -= PlayBubbleBounce;
             Player.OnPlayerHit -= PlayPlayerHit;
             Player.OnPlayerMove -= PlayPlayerMove;
             Player.OnPlayerDeath -= PlayPlayerDeath;
+            BubbleSpawner.OnPopBubble -= PlayBubblePop;
+            Bouncer.OnBounce -= PlayBumperHit;
         }
 
         public void StartMainTheme() => FMOD.StartMusic(_mainTheme);
@@ -41,5 +46,7 @@ namespace BubbleHell.Managers
         private void PlayPlayerHit() => FMOD.PlaySound(AudioPath.SFX_Damage);
         private void PlayPlayerDeath() => FMOD.PlaySound(AudioPath.SFX_Death);
         private void PlayPlayerMove() => FMOD.PlaySound(AudioPath.SFX_Footstep);
+        private void PlayBubblePop() => FMOD.PlaySound(AudioPath.SFX_Pop);
+        private void PlayBumperHit() => FMOD.PlaySound(AudioPath.SFX_Bumper);
     }
 }

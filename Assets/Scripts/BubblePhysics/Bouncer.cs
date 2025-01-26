@@ -1,10 +1,12 @@
 using BubbleHell.Interfaces;
+using System;
 using UnityEngine;
 
-namespace BubbleHell
+namespace BubbleHell.BubblePhysics
 {
     public class Bouncer : MonoBehaviour
     {
+        public static Action OnBounce;
         [SerializeField] private float bounceForce = 10f;
 
         private void OnCollisionEnter(Collision collision)
@@ -12,6 +14,7 @@ namespace BubbleHell
             if (collision.transform.TryGetComponent(out IBounceable bounceable))
             {
                 bounceable.SetSpeed(bounceForce, CalculateBounceVector(bounceable.Velocity, collision.contacts[0].normal));
+                OnBounce?.Invoke();
             }
         }
 
