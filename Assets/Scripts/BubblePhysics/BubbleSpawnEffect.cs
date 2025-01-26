@@ -19,8 +19,11 @@ namespace BubbleHell.BubblePhysics
 		{
 			foreach (GameObject spawnedEffect in _spawnedEffects)
 			{
-				spawnedEffect.GetComponent<ParticleSystem>().Stop();
-				Destroy(spawnedEffect.gameObject);
+				if(spawnedEffect)
+				{
+					spawnedEffect.GetComponent<ParticleSystem>().Stop();
+					Destroy(spawnedEffect.gameObject);
+				}
 			}
 
 			_spawnedEffects.Clear();
