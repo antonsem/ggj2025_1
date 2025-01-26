@@ -1,6 +1,7 @@
 using BubbleHell.BubblePhysics;
 using BubbleHell.Players;
 using FMOD.Studio;
+using System.Collections;
 using UnityEngine;
 
 namespace BubbleHell.Managers
@@ -10,10 +11,16 @@ namespace BubbleHell.Managers
         [SerializeField] private FMODManager FMOD;
         private EventInstance _mainTheme;
 
-        void Awake()
+        private IEnumerator WaitUntilFMODInitalisation()
         {
+            yield return new WaitUntil(FMOD.IsInitialised);
             _mainTheme = FMOD.CreateInstance(AudioPath.MX_MainTheme);
             StartMainTheme();
+        }
+
+        void Awake()
+        {
+           StartCoroutine(WaitUntilFMODInitalisation());
         }
 
         private void OnEnable()

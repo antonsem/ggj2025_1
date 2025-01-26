@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class FMODManager : MonoBehaviour
 {
+    public bool IsInitialised()
+    {
+        return RuntimeManager.IsInitialized && RuntimeManager.HaveMasterBanksLoaded && RuntimeManager.HaveAllBanksLoaded;
+    }
+
     public void PlaySound(string eventName)
     {
         RuntimeManager.PlayOneShot(eventName);
