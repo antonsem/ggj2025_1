@@ -19,11 +19,6 @@ namespace BubbleHell
             _bubbleSpawner = transform.GetChild(0).GetComponent<BubbleSpawner>();
         }
 
-        private void Start()
-        {
-            StartSpawning();
-        }
-
         private void OnEnable()
         {
             gameStateManager.OnGameStateChanged += HandleGameStateChange;
@@ -42,9 +37,7 @@ namespace BubbleHell
             }
             else
             {
-                // Commented out because Anton's system gives (intentional?) double calls upon the startbutton press.
-                // GameOver > InGame calls.
-                //ResetSpawning();
+                ResetSpawning();
             }
         }
 
