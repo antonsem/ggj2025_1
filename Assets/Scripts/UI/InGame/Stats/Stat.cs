@@ -32,7 +32,7 @@ namespace BubbleHell.UI.InGame.Stats
 		{
 			if(lives < 0)
 			{
-				_lives.text = "X";
+				_lives.text = "gg";
 				_playerImage.color = _colorPalette.DisabledImage;
 			}
 			else
@@ -40,7 +40,7 @@ namespace BubbleHell.UI.InGame.Stats
 				_playerImage.color = _player
 					? _colorPalette.Colors[_player.PlayerId]
 					: _colorPalette.DisabledImage;
-				_lives.text = lives.ToString();
+				_lives.text = $" x{lives.ToString()}";
 			}
 		}
 
