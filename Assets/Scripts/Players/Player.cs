@@ -9,7 +9,8 @@ namespace BubbleHell.Players
 	public class Player : MonoBehaviour, IBounceable
 	{
 		public static event Action OnPlayerHit;
-		public static event Action OnPlayerMove;
+		public static event Action OnPlayerDeath;
+        public static event Action OnPlayerMove;
 
         public event Action<Player> OnDied;
 		public event Action<Player> OnEliminated;
@@ -99,12 +100,12 @@ namespace BubbleHell.Players
 
 			if(--Lives >= 0)
 			{
-				OnPlayerHit?.Invoke();
+                OnPlayerHit?.Invoke();
 				OnDied?.Invoke(this);
             }
 			else
 			{
-                OnPlayerHit?.Invoke();
+                OnPlayerDeath?.Invoke();
                 OnEliminated?.Invoke(this);
 			}
 		}

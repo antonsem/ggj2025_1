@@ -18,6 +18,7 @@ namespace BubbleHell
             Hand.OnBubbleHit += PlayBubbleHit;
             BubblePhysics.Bubble.OnBounce += PlayBubbleBounce;
             Player.OnPlayerHit += PlayPlayerHit;
+            Player.OnPlayerDeath += PlayPlayerDeath;
             //Player.OnPlayerMove += PlayPlayerMove;
         }
 
@@ -27,6 +28,7 @@ namespace BubbleHell
             BubblePhysics.Bubble.OnBounce -= PlayBubbleBounce;
             Player.OnPlayerHit -= PlayPlayerHit;
             Player.OnPlayerMove -= PlayPlayerMove;
+            Player.OnPlayerDeath -= PlayPlayerDeath;
         }
 
         private void PlayMainTheme() => FMOD.PlaySound(AudioPath.MX_MainTheme);
