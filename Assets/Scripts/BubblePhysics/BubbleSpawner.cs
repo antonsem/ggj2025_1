@@ -11,6 +11,7 @@ namespace BubbleHell
 {
     public class BubbleSpawner : MonoBehaviour
     {
+        public static event Action OnPopBubble;
         public event Action<Vector3> OnStartSpawn;
         [SerializeField] private GameObject bubble;
         [SerializeField] private Transform ground;
@@ -116,6 +117,7 @@ namespace BubbleHell
             for (int i = transform.childCount - 1; i >= 0; i--)
             {
                 Destroy(transform.GetChild(i).gameObject);
+                OnPopBubble?.Invoke();
                 yield return _popDelay;
             }
             _purgedBubbles = true;
