@@ -38,6 +38,7 @@ public static class AudioPath
     public const string SFX_Damage = "event:/SFX_Damage";
     public const string SFX_Footstep = "event:/SFX_Footstep";
     public const string SFX_Death = "event:/SFX_Death";
-    public const string SFX_Bumper = "event:/SFX_Bumper";
+    public const string SFX_Bumper = "event:/SFX_Bumper"; // Unused
+    public const string SFX_Boing = "event:/SFX_Boing";
     public const string SFX_Pop = "event:/SFX_Pop";
 }
