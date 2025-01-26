@@ -8,6 +8,7 @@ namespace BubbleHell.Players
 {
 	public class Player : MonoBehaviour, IBounceable
 	{
+		public event Action OnAttack;
 		public event Action<int> OnLivesChanged;
 		public event Action<Player> OnDied;
 		public event Action<Player> OnEliminated;
@@ -18,7 +19,6 @@ namespace BubbleHell.Players
 		[SerializeField] private MonoBehaviour[] _disableOnDeathComponents;
 		[SerializeField] private GameObject[] _disableOnDeathGameObjects;
 		[SerializeField] private float _speed;
-		[SerializeField] private Hand _hand;
 
 		public int PlayerId { get; private set; }
 		private int _lives;
@@ -65,7 +65,7 @@ namespace BubbleHell.Players
 		{
 			if(enabled && context.started)
 			{
-				_hand.UseHand();
+				OnAttack?.Invoke();
 			}
 		}
 

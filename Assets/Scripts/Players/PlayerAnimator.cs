@@ -1,4 +1,5 @@
-﻿using BubbleHell.Misc;
+﻿using System;
+using BubbleHell.Misc;
 using BubbleHell.Movables;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -17,6 +18,7 @@ namespace BubbleHell.Players
 		[SerializeField] private Renderer[] _renderers;
 
 		private readonly int _speedHash = Animator.StringToHash("Speed");
+		private readonly int _attackHash = Animator.StringToHash("Attack");
 
 		#region Unity Methods
 
@@ -33,7 +35,15 @@ namespace BubbleHell.Players
 				Debug.LogError($"Movable of {name} are not set! Will not animate...", this);
 				enabled = false;
 			}
+
+			_player.OnAttack += OnAttack;
 		}
+
+		private void OnDestroy()
+		{
+			_player.OnAttack -= OnAttack;
+		}
+
 
 		private void Start()
 		{
@@ -66,6 +76,11 @@ namespace BubbleHell.Players
 		}
 
 		#endregion
+
+		private void OnAttack()
+		{
+			_animator.SetTrigger(_attackHash);
+		}
 
 		private void SetAnimation()
 		{
