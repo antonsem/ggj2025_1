@@ -1,16 +1,18 @@
-using BubbleHell.Managers;
 using BubbleHell.Players;
+using FMOD.Studio;
 using UnityEngine;
 
-namespace BubbleHell
+namespace BubbleHell.Managers
 {
     public class AudioManager : MonoBehaviour
     {
         [SerializeField] private FMODManager FMOD;
+        private EventInstance _mainTheme;
 
         void Awake()
         {
-            PlayMainTheme();
+            _mainTheme = FMOD.CreateInstance(AudioPath.MX_MainTheme);
+            StartMainTheme();
         }
 
         private void OnEnable()
@@ -31,7 +33,9 @@ namespace BubbleHell
             Player.OnPlayerDeath -= PlayPlayerDeath;
         }
 
-        private void PlayMainTheme() => FMOD.PlaySound(AudioPath.MX_MainTheme);
+        public void StartMainTheme() => FMOD.StartMusic(_mainTheme);
+        public void StopMainTheme() => FMOD.StopMusic(_mainTheme);
+
         private void PlayBirdPoke() => FMOD.PlaySound(AudioPath.SFX_BubblePoke);
         private void PlayBubbleBounce() => FMOD.PlaySound(AudioPath.SFX_BubbleBounceWall);
         private void PlayPlayerHit() => FMOD.PlaySound(AudioPath.SFX_Damage);
